@@ -13,6 +13,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers
 });
+
+//comes from the express server and connects the express with the apollo 
 server.applyMiddleware({ app });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,7 +26,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// app.use(routes);
+
+//once the connection to the database is open...(from the mongoose driver)
 
 db.once('open', () => {
   app.listen(PORT, () => {
